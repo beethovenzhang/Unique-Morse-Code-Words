@@ -1,0 +1,41 @@
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        int l=words.length;
+        
+        String [] morseCode = new String[l];
+        for(int j=0;j<l;j++){
+            morseCode[j]=toMorseCode(words[j]);
+            
+        }
+        int s=0;
+        for(int k=0;k<(l-1);k++){
+            for(int a =k;a<l-1;a++){
+                if(morseCode[k].equals(morseCode[a+1])){
+                    s++;
+                    morseCode[a+1]=Integer.toString(a+1);
+                    
+                }
+                
+            }
+            
+        }
+        //System.out.println(Arrays.toString(morseCode));
+        //System.out.println(s);
+        return l-s;
+        
+    }
+    
+    
+    public static String toMorseCode(String word){
+        String [] morseCode={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        String result="";
+        
+        for(int i=0;i<word.length();i++){
+            result=result+morseCode[word.charAt(i)-'a'];
+            
+        }
+        
+        return result;
+        
+    }
+}
